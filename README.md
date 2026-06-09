@@ -1,3 +1,3 @@
-# Modelagem de Nicho Bolena
+# Modelagem de Nicho Boleno
 
 > Scripts para a modelagem de nicho.

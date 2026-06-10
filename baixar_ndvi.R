@@ -22,3 +22,12 @@ br
 
 ggplot() +
   geom_sf(data = br, color = "black")
+
+# Raster de NDVI ----
+
+## Autenticar cliente ----
+
+cliente <- CDSE::GetOAuthClient(id = Sys.getenv("CDSE_ID"),
+                                secret = Sys.getenv("CDSE_SECRET"))
+
+cliente

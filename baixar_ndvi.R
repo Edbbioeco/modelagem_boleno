@@ -35,7 +35,7 @@ cliente
 ## Checar catálogo ----
 
 catalogo <- CDSE::SearchCatalog(aoi = br,
-                                from = "2016-01-01",
+                                from = "2020-01-01",
                                 to = "2026-01-01",
                                 collection = "sentinel-2-l2a",
                                 with_geometry = FALSE,

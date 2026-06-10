@@ -31,3 +31,14 @@ cliente <- CDSE::GetOAuthClient(id = Sys.getenv("CDSE_ID"),
                                 secret = Sys.getenv("CDSE_SECRET"))
 
 cliente
+
+## Checar catálogo ----
+
+catalogo <- CDSE::SearchCatalog(aoi = br,
+                                from = "2016-01-01",
+                                to = "2026-01-01",
+                                collection = "sentinel-2-l2a",
+                                with_geometry = FALSE,
+                                client = cliente)
+
+catalogo

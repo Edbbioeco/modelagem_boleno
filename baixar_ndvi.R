@@ -16,3 +16,9 @@ library(tidyterra)
 
 br <- geobr::read_country(year = 2019)
 
+#@ Visualizar ----
+
+br
+
+ggplot() +
+  geom_sf(data = br, color = "black")

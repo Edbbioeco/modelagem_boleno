@@ -172,8 +172,7 @@ rasters <- purrr::map2(list.files(path = "./ndvi",
                        .progress = TRUE) |>
   setNames(ufs |> sort())
 
-rasters |>
-  terra::rast() |> terra::mosaic()
+rasters
 
 purrr::imap(rasters,
             ~ggplot() +
@@ -182,3 +181,11 @@ purrr::imap(rasters,
                                    na.value = "transparent") +
               labs(title = .y),
            .progress = TRUE)
+
+## Mosáico ----
+
+### Definindo a resolução ----
+
+res <- 1 / 1113194
+
+res

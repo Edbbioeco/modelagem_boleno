@@ -101,7 +101,12 @@ periodo <- catalogo |>
   dplyr::slice_head(n = 1) |>
   dplyr::mutate(data_ini = acquisitionDate,
                 data_fin = acquisitionDate + lubridate::days(30)) |>
-  dplyr::select(Estado, data_ini, data_fin)
+  dplyr::select(Estado, data_ini, data_fin) |>
+  dplyr::arrange(Estado |> factor(levels = Estado |> sort())) |>
+  dplyr::mutate(periodo = purrr::map2(data_ini,
+                                      data_fin,
+                                      ~c(.x, .y))) |>
+  dplyr::pull(periodo)
 
 periodo
 
@@ -127,7 +132,8 @@ dir.create("./ndvi")
 ## Baixar a imegem ----
 
 ufs <- ma_int |>
-  dplyr::pull(NM_UF)
+  dplyr::pull(NM_UF) |>
+  sort()
 
 ufs
 

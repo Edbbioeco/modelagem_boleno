@@ -19,7 +19,7 @@ library(tidyterra)
 ma <- sf::st_read("lml_bioma_e250k_v20250911_A.shp") |>
   dplyr::filter(NM_BIOMA == "Mata Atlântica")
 
-#@ Visualizar ----
+# Visualizar ----
 
 ma
 
@@ -58,15 +58,33 @@ cliente
 
 ## Checar catálogo ----
 
-catalogo <- CDSE::SearchCatalog(aoi = ma |>
-                                  sf::st_bbox() |>
-                                  sf::st_as_sfc(),
-                                from = "2025-01-01",
-                                to = "2026-01-01",
-                                collection = "sentinel-2-l2a",
-                                with_geometry = FALSE,
-                                client = cliente,
-                                filter = "eo:cloud_cover < 0.1")
+### UFs ----
+
+ufs <- ma_int |>
+  dplyr::pull(NM_UF)
+
+ufs
+
+### Catálogo por local ----
+
+catalogo <- purrr::map(ufs,
+                       purrr::in_parallel(
+
+                         ~CDSE::SearchCatalog(aoi = ma_int |>
+                                                dplyr::filter(NM_UF == .x) |>
+                                                sf::st_bbox() |>
+                                                sf::st_as_sfc(),
+                                              from = "2020-01-01",
+                                              to = "2026-01-01",
+                                              collection = "sentinel-2-l2a",
+                                              with_geometry = FALSE,
+                                              client = cliente,
+                                              filter = "eo:cloud_cover < 0.1") |>
+                           dplyr::mutate(Estado = .x)
+
+                       ),
+                       .progress = TRUE) |>
+  dplyr::bind_rows()
 
 catalogo
 

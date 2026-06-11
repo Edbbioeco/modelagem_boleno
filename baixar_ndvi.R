@@ -12,12 +12,12 @@ library(terra)
 
 library(tidyterra)
 
-# Shapefile ----
+# Shapefile da Mata Atlântica ----
 
-## Baixar ----
+## Importar ----
 
-ma <- geobr::read_biomes() |>
-  dplyr::filter(name_biome == "Mata Atlântica")
+ma <- sf::st_read("lml_bioma_e250k_v20250911_A.shp") |>
+  dplyr::filter(NM_BIOMA == "Mata Atlântica")
 
 #@ Visualizar ----
 
@@ -25,6 +25,11 @@ ma
 
 ggplot() +
   geom_sf(data = ma, color = "black")
+
+## Divdir aos estados ----
+
+ma |>
+  sf::st_intersection(geobr::read_state(year = 2019)) |> plot()
 
 # Raster de NDVI ----
 

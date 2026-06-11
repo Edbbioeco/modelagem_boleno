@@ -37,6 +37,16 @@ estados
 ggplot() +
   geom_sf(data = estados, color = "black")
 
+### Intersecção da Mata Atlântica ----
+
+ma_int <- ma |>
+  sf::st_intersection(estados)
+
+ma_int
+
+ggplot() +
+  geom_sf(data = ma_int, color = "black")
+
 # Raster de NDVI ----
 
 ## Autenticar cliente ----

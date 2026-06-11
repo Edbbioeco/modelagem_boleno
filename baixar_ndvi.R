@@ -28,8 +28,14 @@ ggplot() +
 
 ## Divdir aos estados ----
 
-ma |>
-  sf::st_intersection(geobr::read_state(year = 2019)) |> plot()
+### Shapefile dosn estados ----
+
+estados <- sf::st_read("BR_UF_2025.shp")
+
+estados
+
+ggplot() +
+  geom_sf(data = estados, color = "black")
 
 # Raster de NDVI ----
 

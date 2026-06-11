@@ -22,3 +22,12 @@ biomas
 
 ggplot() +
   geom_sf(data = biomas, color = "black")
+
+# Variáveis bioclimáticas ----
+
+## Baixar ----
+
+bio <- geodata::worldclim_country(country = "BRA",
+                                  var = "bio",
+                                  res = 0.5,
+                                  path = tempdir())

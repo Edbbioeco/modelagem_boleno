@@ -16,14 +16,15 @@ library(tidyterra)
 
 ## Baixar ----
 
-br <- geobr::read_country(year = 2019)
+ma <- geobr::read_biomes() |>
+  dplyr::filter(name_biome == "Mata Atlântica")
 
 #@ Visualizar ----
 
-br
+ma
 
 ggplot() +
-  geom_sf(data = br, color = "black")
+  geom_sf(data = ma, color = "black")
 
 # Raster de NDVI ----
 
@@ -36,11 +37,14 @@ cliente
 
 ## Checar catálogo ----
 
-catalogo <- CDSE::SearchCatalog(aoi = br,
-                                from = "2020-01-01",
+catalogo <- CDSE::SearchCatalog(aoi = ma |>  # 5km de tolerância
+                                  sf::st_bbox() |>
+                                  sf::st_as_sfc(),
+                                from = "2025-01-01",
                                 to = "2026-01-01",
                                 collection = "sentinel-2-l2a",
                                 with_geometry = FALSE,
-                                client = cliente)
+                                client = cliente,
+                                filter = "eo:cloud_cover < 0.1")
 
 catalogo

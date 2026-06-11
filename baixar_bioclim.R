@@ -6,9 +6,9 @@ library(tidyverse)
 
 library(geodata)
 
-library(terra)
+library(tidyterra)
 
-library(tidyverse)
+library(terra)
 
 # Shapefile dos biomas ----
 

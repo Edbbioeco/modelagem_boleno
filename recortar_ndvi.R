@@ -64,3 +64,9 @@ ggplot() +
   tidyterra::geom_spatraster(data = ndvi_cort) +
   scale_fill_viridis_c(na.value = "transparent",
                        limits = c(-1, 1))
+
+## Exportar ----
+
+dir.create("./rasters/ndvi")
+
+ndvi_cort |> terra::writeRaster(filename = "rasters/ndvi/ndvi.tif")

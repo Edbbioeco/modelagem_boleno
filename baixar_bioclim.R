@@ -53,3 +53,10 @@ bio_cort
 ggplot() +
   tidyterra::geom_spatraster(data = bio_cort[[1]]) +
   scale_fill_viridis_c(na.value = "transparent")
+
+## Exportar ----
+
+dir.create(path = "./rasters/bioclim",
+           recursive = TRUE)
+
+bio_cort |> terra::writeRaster(filename = "rasters/bioclim/bioclim.tif")

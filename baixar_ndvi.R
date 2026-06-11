@@ -189,3 +189,19 @@ purrr::imap(rasters,
 res <- 1 / 1113194
 
 res
+
+### Criar o mosaico ----
+
+mosaico <- rasters |>
+  purrr::map(purrr::in_parallel(
+    ~terra::resample(.x,
+                     terra::rast(ext = .x |>
+                                   terra::ext(),
+                                 res = res,
+                                 crs = "EPSG:4674"),
+                     method = "bilinear")),
+    .progress = TRUE) |>
+  terra::rast() |>
+  terra::mosaic()
+
+mosaico

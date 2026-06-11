@@ -97,3 +97,27 @@ evalscript
 ## Criar pasta ----
 
 dir.create("./ndvi")
+
+## Baixar a imegem ----
+
+ufs <- ma_int |>
+  dplyr::pull(NM_UF)
+
+ufs
+
+purrr::map(ufs,
+           purrr::in_parallel(
+             ~CDSE::GetImage(bbox = ma_int |>
+                               dplyr::filter(NM_UF == .x) |>
+                               sf::st_bbox(),
+                             time_range = periodo,
+                             script = evalscript,
+                             file = paste0("./ndvi/", .x, "_ndvi.tif"),
+                             collection = "sentinel-2-l2a",
+                             format = "image/tiff",
+                             mosaicking_order = "leastCC",
+                             resolution = 1000,
+                             mask = FALSE,
+                             buffer = 100,
+                             client = cliente)),
+           .progress = TRUE)

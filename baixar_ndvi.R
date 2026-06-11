@@ -49,6 +49,8 @@ catalogo <- CDSE::SearchCatalog(aoi = ma |>
 
 catalogo
 
+catalogo |> dplyr::glimpse()
+
 ## Período ----
 
 periodo <- catalogo |>

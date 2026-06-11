@@ -141,10 +141,10 @@ purrr::map2(ufs,
                               file = paste0("./ndvi/", .x, "_ndvi.tif"),
                               collection = "sentinel-2-l2a",
                               format = "image/tiff",
-                              mosaicking_order = "leastCC",
+                              mosaicking_order = "mostRecent",
                               resolution = 1000,
                               mask = FALSE,
-                              buffer = 100,
+                              buffer = 0,
                               client = cliente)),
            .progress = TRUE)
 

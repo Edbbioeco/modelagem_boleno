@@ -37,7 +37,7 @@ cliente
 
 ## Checar catálogo ----
 
-catalogo <- CDSE::SearchCatalog(aoi = ma |>  # 5km de tolerância
+catalogo <- CDSE::SearchCatalog(aoi = ma |>
                                   sf::st_bbox() |>
                                   sf::st_as_sfc(),
                                 from = "2025-01-01",

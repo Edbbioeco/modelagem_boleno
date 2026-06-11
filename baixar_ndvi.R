@@ -48,3 +48,16 @@ catalogo <- CDSE::SearchCatalog(aoi = ma |>
                                 filter = "eo:cloud_cover < 0.1")
 
 catalogo
+
+## Período ----
+
+periodo <- catalogo |>
+  dplyr::mutate(ano = acquisitionDate |> lubridate::year(),
+                mes = acquisitionDate |> lubridate::month()) |>
+  dplyr::filter(ano == 2025,
+                mes == 1,
+                tileCloudCover == 0) |>
+  dplyr::slice_head(n = 1) |>
+  dplyr::pull(acquisitionDate)
+
+periodo

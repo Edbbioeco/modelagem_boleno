@@ -63,3 +63,12 @@ periodo <- catalogo |>
   dplyr::pull(acquisitionDate)
 
 periodo
+
+## Evalscript ----
+
+evalscript <- rsi::spectral_indices() |>
+  dplyr::filter(short_name == "NDVI") |>
+  CDSE::MakeEvalScript(constellation = "landsat") |>
+  paste(collapse = "\n")
+
+evalscript

@@ -121,3 +121,30 @@ purrr::map(ufs,
                              buffer = 100,
                              client = cliente)),
            .progress = TRUE)
+
+## Importar e recortar ----
+
+rasters <- purrr::map2(list.files(path = "./ndvi",
+                                  full.names = TRUE),
+                       ufs |> sort(),
+                       purrr::in_parallel(
+
+                         ~terra::rast(.x) |>
+                           terra::crop(estados |>
+                                         dplyr::filter(NM_UF == .y)) |>
+                           terra::mask(estados |>
+                                         dplyr::filter(NM_UF == .y))
+
+                       ),
+                       .progress = TRUE) |>
+  setNames(ufs |> sort())
+
+rasters
+
+purrr::imap(rasters,
+            ~ggplot() +
+              tidyterra::geom_spatraster(data = .x) +
+              scale_fill_viridis_c(limits = c(-1, 1),
+                                   na.value = "transparent") +
+              labs(title = .y),
+           .progress = TRUE)

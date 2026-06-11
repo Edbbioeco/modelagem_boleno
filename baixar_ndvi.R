@@ -95,9 +95,9 @@ catalogo |> dplyr::glimpse()
 periodo <- catalogo |>
   dplyr::mutate(ano = acquisitionDate |> lubridate::year(),
                 mes = acquisitionDate |> lubridate::month()) |>
-  dplyr::filter(ano == 2025,
-                mes == 1,
-                tileCloudCover == 0) |>
+  dplyr::filter(tileCloudCover <= 0) |>
+  dplyr::group_by(Estado) |>
+  dplyr::arrange(acquisitionDate) |>
   dplyr::slice_head(n = 1) |>
   dplyr::pull(acquisitionDate)
 

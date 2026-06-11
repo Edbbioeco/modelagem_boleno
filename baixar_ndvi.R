@@ -72,3 +72,7 @@ evalscript <- rsi::spectral_indices() |>
   paste(collapse = "\n")
 
 evalscript
+
+## Criar pasta ----
+
+dir.create("./ndvi")

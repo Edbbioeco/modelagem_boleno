@@ -39,3 +39,17 @@ bio
 ggplot() +
   tidyterra::geom_spatraster(data = bio[[1]]) +
   scale_fill_viridis_c(na.value = "transparent")
+
+## Recortar para a Mata Atlântica ----
+
+bio_cort <- bio |>
+  terra::crop(biomas |>
+                dplyr::filter(NM_BIOMA == "Mata Atlântica")) |>
+  terra::mask(biomas |>
+                dplyr::filter(NM_BIOMA == "Mata Atlântica"))
+
+bio_cort
+
+ggplot() +
+  tidyterra::geom_spatraster(data = bio_cort[[1]]) +
+  scale_fill_viridis_c(na.value = "transparent")

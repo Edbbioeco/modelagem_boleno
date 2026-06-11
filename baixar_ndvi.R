@@ -106,10 +106,16 @@ periodo
 
 ## Evalscript ----
 
-evalscript <- rsi::spectral_indices() |>
-  dplyr::filter(short_name == "NDVI") |>
-  CDSE::MakeEvalScript(constellation = "landsat") |>
-  paste(collapse = "\n")
+### Listar scripts ----
+
+scripts <- list.files(path = "C:/Users/LENOVO/AppData/Local/R/win-library/4.6/CDSE/scripts",
+                      full.names = TRUE)
+
+scripts
+
+### Criar evalscript ----
+
+evalscript <- scripts[3]
 
 evalscript
 

@@ -34,3 +34,22 @@ ndvi
 ggplot() +
   tidyterra::geom_spatraster(data = ndvi) +
   scale_fill_viridis_c(na.value = "transparent")
+
+# Tratar raster ----
+
+## Recortar ----
+
+ndvi_cort <- ndvi |>
+  terra::crop(biomas |>
+                dplyr::filter(NM_BIOMA == "Mata Atlântica")) |>
+  terra::mask(biomas |>
+                dplyr::filter(NM_BIOMA == "Mata Atlântica"))
+
+ndvi_cort
+
+ggplot() +
+  tidyterra::geom_spatraster(data = ndvi_cort) +
+  scale_fill_viridis_c(na.value = "transparent",
+                       limits = c(-1, 1))
+
+

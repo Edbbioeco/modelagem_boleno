@@ -31,3 +31,11 @@ bio <- geodata::worldclim_country(country = "BRA",
                                   var = "bio",
                                   res = 0.5,
                                   path = tempdir())
+
+## Visualizar ----
+
+bio
+
+ggplot() +
+  tidyterra::geom_spatraster(data = bio[[1]]) +
+  scale_fill_viridis_c(na.value = "transparent")

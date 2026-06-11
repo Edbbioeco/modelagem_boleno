@@ -95,7 +95,8 @@ catalogo |> dplyr::glimpse()
 periodo <- catalogo |>
   dplyr::mutate(ano = acquisitionDate |> lubridate::year(),
                 mes = acquisitionDate |> lubridate::month()) |>
-  dplyr::filter(tileCloudCover <= 0) |>
+  dplyr::filter(ano == 2020 &
+                tileCloudCover <= 0.1) |>
   dplyr::group_by(Estado) |>
   dplyr::arrange(acquisitionDate) |>
   dplyr::slice_head(n = 1) |>
@@ -158,7 +159,8 @@ rasters <- purrr::map2(list.files(path = "./ndvi",
                        .progress = TRUE) |>
   setNames(ufs |> sort())
 
-rasters
+rasters |>
+  terra::rast() |> terra::mosaic()
 
 purrr::imap(rasters,
             ~ggplot() +

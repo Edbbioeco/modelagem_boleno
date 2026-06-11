@@ -53,3 +53,14 @@ ggplot() +
                        limits = c(-1, 1))
 
 
+## Reamostrar ----
+
+ndvi_cort <- ndvi_cort |>
+  terra::resample(terra::rast("./rasters/bioclim/bioclim.tif"))
+
+ndvi_cort
+
+ggplot() +
+  tidyterra::geom_spatraster(data = ndvi_cort) +
+  scale_fill_viridis_c(na.value = "transparent",
+                       limits = c(-1, 1))

@@ -89,3 +89,8 @@ registros_thin <- readr::read_csv("thinned_data_thin1.csv") |>
 registros_thin
 
 registros_thin |> dplyr::glimpse()
+
+ggplot() +
+  geom_sf(data = fdn, color = "black") +
+  geom_point(data = registros_thin,
+             aes(longitude, latitude))

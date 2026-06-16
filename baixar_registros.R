@@ -4,6 +4,8 @@ library(rgbif)
 
 library(tidyverse)
 
+library(spThin)
+
 library(geobr)
 
 library(sf)

@@ -75,3 +75,17 @@ spThin::thin(registros_sf |>
              lat.col = "latitude",
              spec.col = "scientificName",
              out.dir = getwd())
+
+## Visualizar ----
+
+registros_thin <- readr::read_csv("thinned_data_thin1.csv") |>
+  dplyr::select(-2) |>
+  tidyr::separate(col = 2,
+                  sep = ",",
+                  into = c("longitude", "latitude")) |>
+  dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
+                              .fns = ~as.numeric(.)))
+
+registros_thin
+
+registros_thin |> dplyr::glimpse()

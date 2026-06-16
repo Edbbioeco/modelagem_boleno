@@ -4,11 +4,11 @@ library(rgbif)
 
 library(tidyverse)
 
-library(spThin)
-
 library(geobr)
 
 library(sf)
+
+library(spThin)
 
 library(writexl)
 
@@ -26,6 +26,7 @@ registros <- rgbif::occ_data(scientificName = "Trachylepis atlantica",
 registros
 
 registros |> dplyr::glimpse()
+             )
 
 # Sahpefile de Fernando de Noronha ----
 

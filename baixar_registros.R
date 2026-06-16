@@ -94,3 +94,7 @@ ggplot() +
   geom_sf(data = fdn, color = "black") +
   geom_point(data = registros_thin,
              aes(longitude, latitude))
+
+# Exportar ----
+
+registros_thin |> writexl::write_xlsx("registros.xlsx")

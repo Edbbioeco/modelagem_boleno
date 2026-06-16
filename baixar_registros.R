@@ -4,6 +4,10 @@ library(rgbif)
 
 library(tidyverse)
 
+library(geobr)
+
+library(sf)
+
 library(writexl)
 
 # Registros ----

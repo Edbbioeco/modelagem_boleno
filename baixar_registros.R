@@ -26,7 +26,6 @@ registros <- rgbif::occ_data(scientificName = "Trachylepis atlantica",
 registros
 
 registros |> dplyr::glimpse()
-             )
 
 # Sahpefile de Fernando de Noronha ----
 
@@ -55,3 +54,24 @@ registros_sf
 ggplot() +
   geom_sf(data = fdn, color = "black") +
   geom_sf(data = registros_sf, color = "black")
+
+# Filtrar registros ----
+
+## Filtrar para 1km ----
+
+spThin::thin(registros_sf |>
+               sf::st_drop_geometry() |>
+               dplyr::mutate(longitude = registros_sf |>
+                               sf::st_coordinates() |>
+                               as.data.frame() |>
+                               dplyr::select(1),
+                             latitude = registros_sf |>
+                               sf::st_coordinates() |>
+                               as.data.frame() |>
+                               dplyr::select(2)),
+             thin.par = 1,
+             reps = 10,
+             long.col = "longitude",
+             lat.col = "latitude",
+             spec.col = "scientificName",
+             out.dir = getwd())

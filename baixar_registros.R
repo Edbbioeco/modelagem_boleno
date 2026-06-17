@@ -78,13 +78,21 @@ spThin::thin(registros_sf |>
 
 ## Visualizar ----
 
-registros_thin <- readr::read_csv("thinned_data_thin1.csv") |>
-  dplyr::select(-2) |>
-  tidyr::separate(col = 2,
-                  sep = ",",
-                  into = c("longitude", "latitude")) |>
-  dplyr::mutate(dplyr::across(.cols = dplyr::contains("itude"),
-                              .fns = ~as.numeric(.)))
+registros_thin <- purrr::map(list.files(pattern = "thinned_data_thin"),
+                             purrr::in_parallel(
+
+                               ~readr::read_csv("thinned_data_thin1.csv") |>
+                                 dplyr::select(-2) |>
+                                 tidyr::separate(col = 2,
+                                                 sep = ",",
+                                                 into = c("longitude",
+                                                          "latitude")) |>
+                                 dplyr::mutate(dplyr::across(
+                                   .cols = dplyr::contains("itude"),
+                                   .fns = ~as.numeric(.)))
+
+                             ),
+                             .progress = TRUE)
 
 registros_thin
 

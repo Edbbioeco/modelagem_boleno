@@ -46,7 +46,7 @@ purrr::map(1:19,
              ~ggplot() +
                tidyterra::geom_spatraster(data = bio[[.x]]) +
                scale_fill_viridis_c(na.value = "transparent") +
-               labs(paste0("Bio", .x))
+               labs(title = paste0("Bio", .x))
 
              ),
            .progress = TRUE)

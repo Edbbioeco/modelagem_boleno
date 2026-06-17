@@ -50,3 +50,17 @@ purrr::map(1:19,
 
              ),
            .progress = TRUE)
+
+### NDVI ----
+
+#### Importar ----
+
+ndvi <- terra::rast("./rasters/ndvi/ndvi.tif")
+
+#### Visualizar ----
+
+ndvi
+
+ggplot() +
+  tidyterra::geom_spatraster(data = ndvi) +
+  scale_fill_viridis_c(na.value = "transparent")

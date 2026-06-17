@@ -100,16 +100,18 @@ registros_thin
 
 registros_thin |> dplyr::glimpse()
 
-purrr::map(registros_thin,
-           purrr::in_parallel(
+purrr::map2(registros_thin,
+            registros_thin |> names(),
+            purrr::in_parallel(
 
-             ~ggplot() +
-               geom_sf(data = fdn, color = "black") +
-               geom_point(data = .x,
-                          aes(longitude, latitude))
+              ~ggplot() +
+                geom_sf(data = fdn, color = "black") +
+                geom_point(data = .x,
+                           aes(longitude, latitude)) +
+                labs(title = .y)
 
-           ),
-           .progress = TRUE)
+              ),
+            .progress = TRUE)
 
 # Exportar ----
 

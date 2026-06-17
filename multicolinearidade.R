@@ -64,3 +64,14 @@ ndvi
 ggplot() +
   tidyterra::geom_spatraster(data = ndvi) +
   scale_fill_viridis_c(na.value = "transparent")
+
+### Unir os dados ----
+
+rasters <- c(bio, ndvi)
+
+names(rasters) <- c(paste0("Bio0", 1:9),
+                    paste0("Bio", 10:19),
+                    "NDVI")
+
+rasters
+

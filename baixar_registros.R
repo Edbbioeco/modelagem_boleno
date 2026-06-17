@@ -92,7 +92,9 @@ registros_thin <- purrr::map(list.files(pattern = "thinned_data_thin"),
                                    .fns = ~as.numeric(.)))
 
                              ),
-                             .progress = TRUE)
+                             .progress = TRUE) |>
+  setNames(list.files(pattern = "thinned_data_thin") |>
+             stringr::str_remove(".csv"))
 
 registros_thin
 

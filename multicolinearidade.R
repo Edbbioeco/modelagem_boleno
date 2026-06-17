@@ -28,6 +28,17 @@ registros
 
 registros |> dplyr::glimpse()
 
+### Transformar em shapefile ----
+
+registros_sf <- registros |>
+  sf::st_as_sf(coords = c(2:3),
+               crs = 4326)
+
+registros_sf
+
+ggplot() +
+  geom_sf(data = registros_sf)
+
 ## Variáveis ambientais ----
 
 ### Variáveis bioclimáticas ----
@@ -86,4 +97,3 @@ purrr::map2(seq(1, terra::nlyr(rasters), 1),
 
               ),
            .progress = TRUE)
-

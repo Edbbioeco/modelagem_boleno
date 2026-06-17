@@ -75,3 +75,15 @@ names(rasters) <- c(paste0("Bio0", 1:9),
 
 rasters
 
+purrr::map2(seq(1, terra::nlyr(rasters), 1),
+            names(rasters),
+            purrr::in_parallel(
+
+              ~ggplot() +
+                tidyterra::geom_spatraster(data = rasters[[.x]]) +
+                scale_fill_viridis_c(na.value = "transparent") +
+                labs(title = .y)
+
+              ),
+           .progress = TRUE)
+

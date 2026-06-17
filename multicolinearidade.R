@@ -97,3 +97,12 @@ purrr::map2(seq(1, terra::nlyr(rasters), 1),
 
               ),
            .progress = TRUE)
+
+# Multicolinearidade ----
+
+## Extrair valores ----
+
+valores <- rasters |>
+  terra::extract(registros_sf)
+
+valores

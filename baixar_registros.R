@@ -98,10 +98,16 @@ registros_thin
 
 registros_thin |> dplyr::glimpse()
 
-ggplot() +
-  geom_sf(data = fdn, color = "black") +
-  geom_point(data = registros_thin,
-             aes(longitude, latitude))
+purrr::map(registros_thin,
+           purrr::in_parallel(
+
+             ~ggplot() +
+               geom_sf(data = fdn, color = "black") +
+               geom_point(data = .x,
+                          aes(longitude, latitude))
+
+           ),
+           .progress = TRUE)
 
 # Exportar ----
 

@@ -148,7 +148,7 @@ cor_matriz |>
        y = NULL) +
   theme_bw() +
   theme(axis.text = element_text(color = "black", size = 20),
-        axis.text.x = element_text(angle = 90, hjust = 0),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
         legend.title = element_text(color = "black", size = 20),
         legend.text = element_text(color = "black", size = 20),
         legend.position = "bottom",

@@ -10,6 +10,20 @@ library(terra)
 
 library(tidyterra)
 
+# Fernando de Noronha ----
+
+## Importar ----
+
+fdn <- geobr::read_municipality(year = 2019) |>
+  dplyr::filter(name_muni == "Fernando de Noronha")
+
+## Visualizar ----
+
+fdn
+
+ggplot() +
+  geom_sf(data = fdn, color = "black")
+
 # Shapefile dos biomas ----
 
 ## Importar ----

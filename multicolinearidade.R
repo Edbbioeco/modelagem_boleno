@@ -115,3 +115,18 @@ cor_matriz <- valores |>
   as.matrix()
 
 cor_matriz
+
+### Gráfico ----
+
+cor_matriz[cor_matriz |> upper.tri()] <- NA
+
+cor_matriz
+
+cor_matriz |>
+  reshape2::melt() |>
+  dplyr::filter(Var1 != Var2) |>
+  tidyr::drop_na() |>
+  ggplot(aes(Var1, Var2, fill = value)) +
+  geom_tile(color = "black", linewidth = 1) +
+  coord_equal() +
+  ggview::canvas(height = 10, width = 12)

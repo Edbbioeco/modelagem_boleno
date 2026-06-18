@@ -88,3 +88,20 @@ ggplot() +
 dir.create("./rasters/ndvi")
 
 ndvi_cort |> terra::writeRaster(filename = "rasters/ndvi/ndvi.tif")
+
+## Fernando de Noronha ----
+
+### Recortar ----
+
+ndvi_fdn <- ndvi |>
+  terra::crop(fdn |>
+                sf::st_concave_hull(ratio = 0.3)) |>
+  terra::mask(fdn |>
+                sf::st_concave_hull(ratio = 0.3))
+
+ndvi_fdn
+
+ggplot() +
+  tidyterra::geom_spatraster(data = ndvi_fdn) +
+  scale_fill_viridis_c(na.value = "transparent",
+                       limits = c(-1, 1))

@@ -111,6 +111,7 @@ valores
 ## Matriz de correlação ----
 
 cor_matriz <- valores |>
+  dplyr::select(-1) |>
   cor(method = "spearman") |>
   as.matrix()
 

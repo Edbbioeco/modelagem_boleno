@@ -103,6 +103,7 @@ purrr::map2(seq(1, terra::nlyr(rasters), 1),
 ## Extrair valores ----
 
 valores <- rasters |>
-  terra::extract(registros_sf)
+  terra::extract(registros_sf) |>
+  tidyr::drop_na()
 
 valores

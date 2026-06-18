@@ -127,6 +127,7 @@ cor_matriz |>
   reshape2::melt() |>
   dplyr::filter(Var1 != Var2) |>
   tidyr::drop_na() |>
+  dplyr::mutate(value = value |> round(2)) |>
   ggplot(aes(Var1, Var2, fill = value, label = value)) +
   geom_tile(color = "black", linewidth = 1) +
   geom_text(color = "black", size = 7) +

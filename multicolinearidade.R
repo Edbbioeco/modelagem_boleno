@@ -130,7 +130,7 @@ cor_matriz |>
   dplyr::mutate(value = value |> round(2)) |>
   ggplot(aes(Var1, Var2, fill = value, label = value)) +
   geom_tile(color = "black", linewidth = 1) +
-  geom_text(color = "black", size = 7) +
+  geom_text(color = "black", size = 4.25) +
   coord_equal() +
   scale_fill_gradientn(limits = c(-1, 1),
                        colours = c(viridis::viridis(n = 10) |> rev(),

@@ -107,3 +107,10 @@ valores <- rasters |>
   tidyr::drop_na()
 
 valores
+
+## Matriz de correlação ----
+
+cor_matriz <- valores |>
+  cor(method = "spearman")
+
+cor_matriz

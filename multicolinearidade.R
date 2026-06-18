@@ -150,6 +150,7 @@ cor_matriz |>
   theme(axis.text = element_text(color = "black", size = 20),
         axis.text.x = element_text(angle = 90, hjust = 0),
         legend.title = element_text(color = "black", size = 20),
+        legend.text = element_text(color = "black", size = 20),
         legend.position = "bottom",
         panel.border = element_rect(color = "black", linewidth = 1)) +
   ggview::canvas(height = 10, width = 12)

@@ -111,6 +111,7 @@ valores
 ## Matriz de correlação ----
 
 cor_matriz <- valores |>
-  cor(method = "spearman")
+  cor(method = "spearman") |>
+  as.matrix()
 
 cor_matriz

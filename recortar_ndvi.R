@@ -53,7 +53,9 @@ ggplot() +
 
 # Tratar raster ----
 
-## Recortar ----
+## Mata Atlântica ----
+
+### Recortar ----
 
 ndvi_cort <- ndvi |>
   terra::crop(biomas |>
@@ -69,7 +71,7 @@ ggplot() +
                        limits = c(-1, 1))
 
 
-## Reamostrar ----
+### Reamostrar ----
 
 ndvi_cort <- ndvi_cort |>
   terra::resample(terra::rast("./rasters/bioclim/bioclim.tif"))
@@ -81,7 +83,7 @@ ggplot() +
   scale_fill_viridis_c(na.value = "transparent",
                        limits = c(-1, 1))
 
-## Exportar ----
+### Exportar ----
 
 dir.create("./rasters/ndvi")
 

@@ -130,7 +130,7 @@ cor_matriz |>
   dplyr::mutate(value = value |> round(2)) |>
   ggplot(aes(Var1, Var2, fill = value, label = value)) +
   geom_tile(color = "black", linewidth = 1) +
-  geom_text(color = "black", size = 4.25) +
+  geom_text(color = "black", size = 5, fontface = "bold") +
   coord_equal() +
   scale_fill_gradientn(limits = c(-1, 1),
                        colours = c(viridis::viridis(n = 10) |> rev(),
@@ -153,4 +153,4 @@ cor_matriz |>
         legend.text = element_text(color = "black", size = 20),
         legend.position = "bottom",
         panel.border = element_rect(color = "black", linewidth = 1)) +
-  ggview::canvas(height = 10, width = 12)
+  ggview::canvas(height = 12, width = 14)

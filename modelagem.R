@@ -147,4 +147,4 @@ ggplot() +
 
 ### Exportar ----
 
-ensemble |> terra::writeRaster("ensemble.tif")
+ensemble |> terra::writeRaster("./rasters/ensemble.tif")

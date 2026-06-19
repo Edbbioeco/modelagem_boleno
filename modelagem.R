@@ -35,3 +35,13 @@ registros_vect <- registros[c(1, 4, 6, 8, 11, 13, 14), ] |>
   terra::vect()
 
 registros_vect
+
+## Variáveis bioclimáticas ----
+
+### Importar ----
+
+rasters <- purrr::map(list.files(path = "./rasters/",
+                      full.names = TRUE,
+                      recursive = TRUE),
+           terra::rast) |>
+  terra::rast()

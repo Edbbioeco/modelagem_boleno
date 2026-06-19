@@ -159,6 +159,19 @@ cor_matriz |>
 
 vars <- c(3, 4, 13, 14, 16, 17, 18, 19, 20)
 
+vars <- purrr::map_chr(vars,
+                       ~if(.x < 10){
+
+                         paste0("Bio0", .x)
+
+                         } else {
+
+                         paste0("Bio", .x)
+
+                         })
+
+vars
+
 cor_matriz |>
   reshape2::melt() |>
   dplyr::filter(Var1 != Var2) |>

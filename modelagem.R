@@ -113,3 +113,16 @@ id_modelos <- modelo |>
   dplyr::pull(modelID)
 
 id_modelos
+
+## Predição ----
+
+pred <- terra::predict(modelos,
+                       newdata = rasters,
+                       id = id_modelos)
+
+pred
+
+ggplot() +
+  tidyterra::geom_spatraster(data = pred) +
+  scale_fill_viridis_c(na.value = "transparent") +
+  facet_wrap(~lyr)

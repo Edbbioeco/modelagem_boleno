@@ -162,8 +162,12 @@ vars <- c(3, 4, 13, 14, 16, 17, 18, 19, 20)
 cor_matriz |>
   reshape2::melt() |>
   dplyr::filter(Var1 != Var2) |>
-  dplyr::filter(Var1 %in% c(paste0("Bio", vars), "NDVI") &
-                  Var2 %in% c(paste0("Bio", vars), "NDVI")) |>
+  dplyr::filter(Var1 %in% c(paste0("Bio0", vars[vars < 10]),
+                            paste0("Bio", vars[vars >= 10]),
+                            "NDVI") &
+                  Var2 %in% c(paste0("Bio0", vars[vars < 10]),
+                              paste0("Bio", vars[vars >= 10]),
+                              "NDVI")) |>
   tidyr::drop_na() |>
   dplyr::mutate(value = value |> round(2)) |>
   ggplot(aes(Var1, Var2, fill = value, label = value)) +

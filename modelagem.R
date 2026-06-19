@@ -64,3 +64,14 @@ purrr::map(seq(1, terra::nlyr(rasters), 1),
 
              ),
            .progress = TRUE)
+
+# Modelagem ----
+
+## Objeto sdmData ----
+
+sdmdata <- sdm::sdmData(sp ~ .,
+                        train = registros_vect,
+                        predictors = rasters,
+                        bg = list(method = "gRandom", n = 1000))
+
+sdmdata

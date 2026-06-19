@@ -45,3 +45,22 @@ rasters <- purrr::map(list.files(path = "./rasters/",
                       recursive = TRUE),
            terra::rast) |>
   terra::rast()
+
+### Visualizar ----
+
+names(rasters) <- c(paste0("Bio0", 1:9),
+                    paste0("Bio", 10:19),
+                    "NDVI")
+
+rasters
+
+purrr::map(seq(1, terra::nlyr(rasters), 1),
+           purrr::in_parallel(
+
+             ~ggplot() +
+               tidyterra::geom_spatraster(data = rasters[[.x]]) +
+               scale_fill_viridis_c(na.value = "transparent") +
+               facet_wrap(~lyr)
+
+             ),
+           .progress = TRUE)

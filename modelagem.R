@@ -32,6 +32,7 @@ registros |> dplyr::glimpse()
 
 registros_vect <- registros[c(1, 4, 6, 8, 11, 13, 14), ] |>
   dplyr::rename("sp" = 1) |>
+  dplyr::mutate(sp = "Trachylepis_atlantica") |>
   terra::vect()
 
 registros_vect

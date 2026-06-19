@@ -76,3 +76,27 @@ sdmdata <- sdm::sdmData(sp ~ .,
                         bg = list(method = "gRandom", n = 1000))
 
 sdmdata
+
+## Criar multiplos modelos para os diferentes algorítimos ----
+
+modelos <- purrr::map(c("gam",
+                        "glm",
+                        "maxent",
+                        "maxlike"),
+                      purrr::in_parallel(
+
+                        ~sdm::sdm(Trachylepis_atlantica ~ .,
+                                  data = sdmdata,
+                                  methods = .x,
+                                  replication = "sub",
+                                  test.percent = 30,
+                                  n = 5)
+
+                      ),
+                      .progress = TRUE) |>
+  setNames(c("gam",
+             "glm",
+             "maxent",
+             "maxlike"))
+
+modelos

@@ -91,6 +91,11 @@ modelos <- sdm::sdm(Trachylepis_atlantica ~ .,
 
 modelos
 
+## Exportar modelo ----
+
+modelos |> sdm::write.sdm("modelo.sdm")
+
+modelo <- sdm::read.sdm("modelo.sdm")
 
 ## Selecionar os melhores modelos de cada algorírimo ----
 

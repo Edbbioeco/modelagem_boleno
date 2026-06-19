@@ -164,11 +164,17 @@ vars <- purrr::map_chr(vars,
 
                          paste0("Bio0", .x)
 
-                         } else {
+                         } else if(.x |> dplyr::between(10, 19)){
 
-                         paste0("Bio", .x)
+                           paste0("Bio", .x)
 
-                         })
+                           } else {
+
+                             "NDVI"
+
+                             }
+
+                       )
 
 vars
 

@@ -145,7 +145,8 @@ ggplot() +
 
 ### Exportar ----
 
-ensemble |> terra::writeRaster("./rasters/ensemble.tif")
+ensemble |> terra::writeRaster("./rasters/ensemble.tif",
+                               overwrite = TRUE)
 
 ## Ocorrência ----
 

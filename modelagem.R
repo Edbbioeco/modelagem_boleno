@@ -152,10 +152,10 @@ ensemble |> terra::writeRaster("./rasters/ensemble.tif",
 
 ### Criar ----
 
-pa <- sdm::pa(pred,
-              modelos[[id_modelos]])
+pa <- sdm::pa(ensemble,
+              modelos)
 
-## Visualizar ----
+### Visualizar ----
 
 pa
 
@@ -163,3 +163,8 @@ ggplot() +
   tidyterra::geom_spatraster(data = pa) +
   scale_fill_viridis_c(na.value = "transparent",
                        limits = c(0, 1))
+
+### Exportar ----
+
+pa |> terra::writeRaster("./rasters/pa.tif",
+                         overwrite = TRUE)

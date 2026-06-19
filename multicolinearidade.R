@@ -158,3 +158,37 @@ cor_matriz |>
 ## Escolher variáveis ----
 
 vars <- c(3, 4, 13, 14, 16, 17, 18, 19, 20)
+
+cor_matriz |>
+  reshape2::melt() |>
+  dplyr::filter(Var1 != Var2) |>
+  dplyr::filter(Var1 %in% c(paste0("Bio", vars), "NDVI") &
+                  Var2 %in% c(paste0("Bio", vars), "NDVI")) |>
+  tidyr::drop_na() |>
+  dplyr::mutate(value = value |> round(2)) |>
+  ggplot(aes(Var1, Var2, fill = value, label = value)) +
+  geom_tile(color = "black", linewidth = 1) +
+  geom_text(color = "black", size = 5, fontface = "bold") +
+  coord_equal() +
+  scale_fill_gradientn(limits = c(-1, 1),
+                       colours = c(viridis::viridis(n = 10) |> rev(),
+                                   viridis::viridis(n = 10)),
+                       guide = guide_colourbar(
+                         title = "Spearman Correlation Index",
+                         title.position = "top",
+                         title.hjust = 0.5,
+                         barwidth = 20,
+                         frame.colour = "black",
+                         ticks.colour = "black",
+                         ticks.linewidth = 1)
+  ) +
+  labs(x = NULL,
+       y = NULL) +
+  theme_bw() +
+  theme(axis.text = element_text(color = "black", size = 20),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
+        legend.title = element_text(color = "black", size = 20),
+        legend.text = element_text(color = "black", size = 20),
+        legend.position = "bottom",
+        panel.border = element_rect(color = "black", linewidth = 1)) +
+  ggview::canvas(height = 12, width = 14)

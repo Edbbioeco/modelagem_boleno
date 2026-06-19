@@ -99,7 +99,7 @@ modelos <- sdm::read.sdm("modelo.sdm")
 
 ## Selecionar os melhores modelos de cada algorírimo ----
 
-id_modelos <- modelo |>
+id_modelos <- modelos |>
   sdm::getEvaluation() |>
   dplyr::mutate(algoritimo = rep(c("gam",
                                    "glm",
@@ -107,9 +107,7 @@ id_modelos <- modelo |>
                                    "maxlike"),
                                  each = 10)) |>
   dplyr::group_by(algoritimo) |>
-  dplyr::arrange(AUC |> dplyr::desc(),
-                 TSS |> dplyr::desc()) |>
-  dplyr::slice(1) |>
+  dplyr::filter(AUC > 0.7 & TSS > 0.7) |>
   dplyr::pull(modelID)
 
 id_modelos
@@ -148,3 +146,19 @@ ggplot() +
 ### Exportar ----
 
 ensemble |> terra::writeRaster("./rasters/ensemble.tif")
+
+## Ocorrência ----
+
+### Criar ----
+
+pa <- sdm::pa(pred,
+              modelos[[id_modelos]])
+
+## Visualizar ----
+
+pa
+
+ggplot() +
+  tidyterra::geom_spatraster(data = pa) +
+  scale_fill_viridis_c(na.value = "transparent",
+                       limits = c(0, 1))

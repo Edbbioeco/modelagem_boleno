@@ -126,3 +126,25 @@ ggplot() +
   tidyterra::geom_spatraster(data = pred) +
   scale_fill_viridis_c(na.value = "transparent") +
   facet_wrap(~lyr)
+
+## Ensemble ----
+
+### Criar ----
+
+ensemble <- sdm::ensemble(modelos,
+                          pred,
+                          setting = list(method = "weighted",
+                                         stat = "AUC"))
+
+### Visualizar ----
+
+ensemble
+
+ggplot() +
+  tidyterra::geom_spatraster(data = ensemble) +
+  scale_fill_viridis_c(na.value = "transparent",
+                       limits = c(0, 1))
+
+### Exportar ----
+
+ensemble |> terra::writeRaster("ensemble.tif")

@@ -154,3 +154,7 @@ cor_matriz |>
         legend.position = "bottom",
         panel.border = element_rect(color = "black", linewidth = 1)) +
   ggview::canvas(height = 12, width = 14)
+
+## Escolher variáveis ----
+
+vars <- c(3, 4, 13, 14, 16, 17, 18, 19, 20)

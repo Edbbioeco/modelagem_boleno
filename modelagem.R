@@ -120,10 +120,16 @@ pred <- terra::predict(modelos,
 
 pred
 
-ggplot() +
-  tidyterra::geom_spatraster(data = pred) +
-  scale_fill_viridis_c(na.value = "transparent") +
-  facet_wrap(~lyr)
+purrr::map(seq(1, terra::nlyr(pred), 1),
+           purrr::in_parallel(
+
+             ~ggplot() +
+               tidyterra::geom_spatraster(data = pred[[.x]]) +
+               scale_fill_viridis_c(na.value = "transparent") +
+               facet_wrap(~lyr)
+
+           ),
+           .progress = TRUE)
 
 ## Ensemble ----
 

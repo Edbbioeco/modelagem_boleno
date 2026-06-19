@@ -100,3 +100,25 @@ modelos <- purrr::map(c("gam",
              "maxlike"))
 
 modelos
+
+
+## Selecionar os melhores modelos de cada algorírimo ----
+
+ind_modelos <- purrr::map_dbl(modelos,
+                              purrr::in_parallel(
+
+                                ~.x |>
+                                  sdm::getEvaluation() |>
+                                  dplyr::arrange(AUC |> dplyr::desc(),
+                                                 TSS |> dplyr::desc()) |>
+                                  dplyr::slice(1) |>
+                                  dplyr::pull(modelID)
+
+                                ),
+                              .progress = TRUE) |>
+  setNames(c("gam",
+             "glm",
+             "maxent",
+             "maxlike"))
+
+ind_modelos

@@ -90,7 +90,7 @@ modelos <- purrr::map(c("gam",
                                   methods = .x,
                                   replication = "sub",
                                   test.percent = 30,
-                                  n = 5)
+                                  n = 10)
 
                       ),
                       .progress = TRUE) |>
